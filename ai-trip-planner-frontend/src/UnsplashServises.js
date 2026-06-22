@@ -4,7 +4,7 @@ import axios from "axios";
 export const getGenerateImages = async (searchImage) => {
 
     const accesKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY
-    
+
     try {
         const response = await axios.get("https://api.unsplash.com/search/photos", {
 
@@ -17,10 +17,10 @@ export const getGenerateImages = async (searchImage) => {
 
 
         })
-        return response.data.results[0]?.urls.small || "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop"
+        return response.data.results[0]?.urls.small || "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop"
 
     } catch (error) {
-        return "https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=1000&auto=format&fit=crop";
+        return "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop";
     }
 }
 

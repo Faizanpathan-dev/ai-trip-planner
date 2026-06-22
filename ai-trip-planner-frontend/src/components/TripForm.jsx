@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import axios from "axios"
 
-const TripForm = ({ setPlan ,load, setLoad}) => {
-    
+const TripForm = ({ setPlan, load, setLoad }) => {
+
     const [form, setForm] = useState({
-        destination: "" ,
-        startDate: "" ,
-        endDate: "" ,
-        budget: "" ,
-    
+        destination: "",
+        startDate: "",
+        endDate: "",
+        budget: "",
+
     })
 
-    
 
-    let[err,setErr] = useState("")
+
+    let [err, setErr] = useState("")
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +24,10 @@ const TripForm = ({ setPlan ,load, setLoad}) => {
 
         try {
 
-            let response = await axios.post("http://localhost:8080/api/ai/plan", {
+
+            // "http://localhost:8080/api/ai/plan" env me dal diya 
+
+            let response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/ai/plan`, {
                 destination: form.destination,
                 startDate: form.startDate,
                 endDate: form.endDate,
@@ -33,7 +36,7 @@ const TripForm = ({ setPlan ,load, setLoad}) => {
             })
 
 
-setPlan(response.data)
+            setPlan(response.data)
 
         }
         catch (err) {
@@ -52,33 +55,33 @@ setPlan(response.data)
             [e.target.name]: e.target.value
         })
     }
-    
-  return (
-      <div className='form-card'>
-          <h1 >Ai Trip Planner</h1>
-          <p >Plan your trip with AI in seconds.</p>
-          <form onSubmit={handleSubmit}>
-              
-              <label >Destination</label>
-              <input type='text' placeholder='Destination' name="destination" value={form.destination} onChange={handleChange} />
 
-            <label>Start Date</label>
-          <input type='date' placeholder='startDate' name="startDate" value={form.startDate} onChange={handleChange} />
-          
-             <label htmlFor="">End Date</label> 
-          <input type="date" placeholder="endDate" name="endDate" value={form.endDate} onChange={handleChange} />
+    return (
+        <div className='form-card'>
+            <h1 >Ai Trip Planner</h1>
+            <p >Plan your trip with AI in seconds.</p>
+            <form onSubmit={handleSubmit}>
 
-              <label htmlFor="">Budget</label>
-          <input type='number' placeholder='Budget' name="budget" value={form.budget} onChange={handleChange} />
-              <button disabled={load} type='submit' > {load ? "Generating..." : "Generate trip"} </button>
-                  
-          </form>
+                <label >Destination</label>
+                <input type='text' placeholder='Destination' name="destination" value={form.destination} onChange={handleChange} />
 
-          {err && <p className='error-message'>{err}</p>}
+                <label>Start Date</label>
+                <input type='date' placeholder='startDate' name="startDate" value={form.startDate} onChange={handleChange} />
 
-      </div>
-      
-  )
+                <label htmlFor="">End Date</label>
+                <input type="date" placeholder="endDate" name="endDate" value={form.endDate} onChange={handleChange} />
+
+                <label htmlFor="">Budget</label>
+                <input type='number' placeholder='Budget' name="budget" value={form.budget} onChange={handleChange} />
+                <button disabled={load} type='submit' > {load ? "Generating..." : "Generate trip"} </button>
+
+            </form>
+
+            {err && <p className='error-message'>{err}</p>}
+
+        </div>
+
+    )
 }
 
 export default TripForm
