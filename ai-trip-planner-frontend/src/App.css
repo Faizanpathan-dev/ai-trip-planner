@@ -8,7 +8,6 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background-color: #f0f4f8;
-  /* Soft, clean, modern gray background */
   transition: all 0.5s ease;
 }
 
@@ -18,7 +17,7 @@ body {
   color: #1e293b;
 }
 
-/* MAIN CONTAINERS */
+ /* MAIN CONTAINERS  */
 .form-card {
   background-color: white;
   padding: 24px;
@@ -27,7 +26,7 @@ body {
   border-radius: 16px;
   border: 1px solid #e2e8f0;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
-  /* Soft, floating shadow */
+  
 }
 
 /* Make the results wrapper transparent so inner cards can float */
@@ -411,6 +410,9 @@ h4 {
 
 
 @media (max-width: 768px) {
+  .app-root{
+    padding: 15px;
+  }
   .home-page {
     flex-direction: column;
   }
