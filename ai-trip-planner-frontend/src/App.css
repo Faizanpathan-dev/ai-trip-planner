@@ -34,7 +34,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* Adds clean spacing between major sections */
+
 }
 
 .empty-result {
@@ -91,7 +91,7 @@ body {
   border: none;
   border-radius: 8px;
   background-color: #0f766e;
-  /* Primary Teal */
+
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -120,7 +120,7 @@ body {
 .day-card,
 .hotel-card {
   background-color: #f8fafc;
-  /* Very faint gray so they stand out from white */
+
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 16px;
@@ -195,14 +195,14 @@ h4 {
   -webkit-box-orient: vertical;
   overflow: hidden;
   transition: all 0.3s ease;
-  /* Makes the opening smooth */
+
 }
 
 .hotel-info p:hover {
   -webkit-line-clamp: unset;
-  /* Removes the 2-line limit on hover */
+
   cursor: pointer;
-  /* Shows the user they can interact with it */
+
 }
 
 .booking-tip {
@@ -225,10 +225,10 @@ h4 {
 
 .hotel-card a:hover {
   border-bottom: 2px solid #0f766e;
-  /* Clean underline on hover */
+
 }
 
-/* DAY BADGE */
+
 .day-badge {
   width: 54px;
   height: 54px;
@@ -282,7 +282,7 @@ h4 {
 
 .suggestion-section li {
   margin-bottom: 12px;
-  /* More breathing room */
+
 }
 
 .hotel-action {
@@ -303,7 +303,7 @@ h4 {
   padding-right: 8px;
 }
 
-/* BUDGET STYLES */
+
 .budget-section {
   grid-column: span 2;
 }
@@ -329,10 +329,10 @@ h4 {
   color: #0f172a;
 }
 
-/* The "Total" budget box */
+
 .budget-total {
   background-color: #e6fcf5;
-  /* Very soft pale mint instead of neon green */
+
   border: 1px solid #0f766e;
 }
 
@@ -375,10 +375,10 @@ h4 {
   width: 340px;
   flex-shrink: 0;
 
-  /* Add these two lines to make it float as you scroll! */
+
   position: sticky;
   top: 30px;
-  /* This keeps a 30px gap from the top of the screen */
+
 }
 
 
@@ -459,5 +459,19 @@ h4 {
     align-items: flex-start;
   }
 
+
+}
+
+.countdown-timer{
+
+  margin-top: 16px;
+  font-size: 18px;
+      color: #0f766e;
+    font-weight: 500;
+
+}
+
+.countdown-timer strong {
+  font-size: 24px;
 
 }

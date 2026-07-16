@@ -19,12 +19,55 @@ const TripResult = ({ plan, load }) => {
     fetchImage();
 
   }, [plan])
+
+  const [count, setCount] = useState(30);
+
+  useEffect(() => {
+    if (load) {
+
+      setCount(30)
+
+      let timer = setInterval(() => {
+
+        if (load) {
+          setCount(prev => {
+            if (prev < 1) {
+               clearInterval(timer)
+              return 0;
+             
+            }
+
+            return prev - 1;
+          })
+
+         
+        }
+
+      }, 1000)
+
+       return ()=> clearInterval(timer)
+
+
+
+    }
+
+  }, [load])
+
+
+
+
   if (load) {
     return (
       <div className='empty-result'>
         <h2>✨ AI is working its magic...</h2>
         <div className='spinner'></div>
         <p>Creating your perfect itinerary, finding hotels, and gathering local tips. Please wait!</p>
+
+
+ <div className='countdown-timer'>
+            ⏱️ Ready in approximately <strong>{count}s</strong>
+          </div>
+
       </div>
     );
   }
@@ -32,9 +75,12 @@ const TripResult = ({ plan, load }) => {
   if (!plan) {
     return (
       <div className='empty-result'>
-         <h2 style={{ fontSize: '40px', marginBottom: '10px' }}>🌍</h2>
-         <h2>Ready for an adventure?</h2>
-         <p>Fill out your destination, dates, and budget on the left to generate a complete AI-powered trip plan in seconds!</p>
+        <h2 style={{ fontSize: '40px', marginBottom: '10px' }}>🌍</h2>
+        <h2>Ready for an adventure?</h2>
+        <p>Fill out your destination, dates, and budget on the left to generate a complete AI-powered trip plan in seconds!</p>
+        <div>
+         
+        </div>
       </div>
     );
   }
@@ -45,18 +91,18 @@ const TripResult = ({ plan, load }) => {
 
       <div className='trip-header' >
         {cityurl && <img className="trip-main-image" src={cityurl} alt='cityImage' />}
-      
 
-      <div>
+
+        <div>
           <h2>  {plan.destination} Trip</h2>
-         <p>
-          {plan.startDate} to {plan.endDate}
+          <p>
+            {plan.startDate} to {plan.endDate}
 
-        </p>
-        <p>Budget : ₹{plan.budget}</p>
+          </p>
+          <p>Budget : ₹{plan.budget}</p>
 
 
-      </div>
+        </div>
 
       </div>
 
@@ -100,7 +146,7 @@ const TripResult = ({ plan, load }) => {
 
       <div className='bottom-grid'>
         <SuggetionList item={plan.foodSuggestions} title="Food Sugetions" showImage={true} />
-        <SuggetionList item={plan.transportSuggestions} title="Transport Suggetions"  showImage={true}/>
+        <SuggetionList item={plan.transportSuggestions} title="Transport Suggetions" showImage={true} />
         <SuggetionList item={plan.travelTips} title="Travel Tips" /></div>
     </div>
   )

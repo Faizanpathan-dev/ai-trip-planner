@@ -3,6 +3,9 @@ import axios from "axios"
 
 const TripForm = ({ setPlan, load, setLoad }) => {
 
+
+const today = new Date().toISOString().split('T')[0]
+
     const [form, setForm] = useState({
         destination: "",
         startDate: "",
@@ -56,6 +59,8 @@ const TripForm = ({ setPlan, load, setLoad }) => {
         })
     }
 
+
+
     return (
         <div className='form-card'>
             <h1 >Ai Trip Planner</h1>
@@ -66,10 +71,10 @@ const TripForm = ({ setPlan, load, setLoad }) => {
                 <input type='text' placeholder='Destination' name="destination" value={form.destination} onChange={handleChange} />
 
                 <label>Start Date</label>
-                <input type='date' placeholder='startDate' name="startDate" value={form.startDate} onChange={handleChange} />
+                <input type='date' placeholder='startDate' name="startDate" value={form.startDate} onChange={handleChange} min={today} />
 
                 <label htmlFor="">End Date</label>
-                <input type="date" placeholder="endDate" name="endDate" value={form.endDate} onChange={handleChange} />
+                <input type="date" placeholder="endDate" name="endDate" value={form.endDate} onChange={handleChange} min={form.startDate} />
 
                 <label htmlFor="">Budget</label>
                 <input type='number' placeholder='Budget' name="budget" value={form.budget} onChange={handleChange} />
