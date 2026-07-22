@@ -145,8 +145,8 @@ const TripResult = ({ plan, load }) => {
 
 
       <div className='bottom-grid'>
-        <SuggetionList item={plan.foodSuggestions} title="Food Sugetions" showImage={true} />
-        <SuggetionList item={plan.transportSuggestions} title="Transport Suggetions" showImage={true} />
+        <SuggetionList item={plan.foodSuggestions} title="Food Sugetions" showImage={true} category="food"  />
+        <SuggetionList item={plan.transportSuggestions} title="Transport Suggetions" showImage={true} category="transport" />
         <SuggetionList item={plan.travelTips} title="Travel Tips" /></div>
     </div>
   )

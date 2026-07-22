@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-export const getGenerateImages = async (searchImage) => {
+export const getGenerateImages = async (searchImage, fallbackUrl = "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&auto=format&fit=crop") => {
 
     const accesKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY
 
@@ -17,10 +17,10 @@ export const getGenerateImages = async (searchImage) => {
 
 
         })
-        return response.data.results[0]?.urls.small || "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop"
+        return response.data.results[0]?.urls.small || fallbackUrl
 
     } catch (error) {
-        return "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop";
+        return fallbackUrl;
     }
 }
 
