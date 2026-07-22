@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getGenerateImages } from '../UnsplashServises';
 
-const SuggetionItem = ({ item, showImage }) => {
+const SuggetionItem = ({ item, showImage, defaultImage }) => {
 
   const [imgUrl, SetImageUrl] = useState(null)
 
@@ -9,6 +9,8 @@ const SuggetionItem = ({ item, showImage }) => {
   useEffect(() => {
 
     const fetchimg = async () => {
+
+
       const url = await getGenerateImages(item?.imageKeyword);
 
       SetImageUrl(url)
@@ -21,7 +23,9 @@ const SuggetionItem = ({ item, showImage }) => {
 
   return (
     <li style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-      {imgUrl && <img src={imgUrl} alt={item.imageKeyword} style={{ width: "100px", height: "100px", borderRadius: '8px' }} />}
+      
+     {(imgUrl || defaultImage) && <img src={imgUrl || defaultImage} alt={item.imageKeyword}
+      style={{ width: "100px", height: "100px", borderRadius: '8px' }} />}
       <span>{item.text}</span>
     </li>
 
@@ -29,7 +33,7 @@ const SuggetionItem = ({ item, showImage }) => {
 
 }
 
-const SuggetionList = ({ item, title, showImage = false }) => {
+const SuggetionList = ({ item, title, showImage = false, defaultImage }) => {
 
   if (!item) {
 
@@ -45,7 +49,7 @@ const SuggetionList = ({ item, title, showImage = false }) => {
       <ul style={{ listStyleType: showImage ? "none" : "disc" }}>
         {item.map((e, index) => (
 
-          showImage ? <SuggetionItem key={index} item={e} showImage={showImage} />
+          showImage ? <SuggetionItem key={index} item={e} showImage={showImage} defaultImage={defaultImage} />
             : <li key={index}>{e}</li>
         ))}
 

@@ -20,32 +20,32 @@ const TripResult = ({ plan, load }) => {
 
   }, [plan])
 
-  const [count, setCount] = useState(30);
+  const [count, setCount] = useState(60);
 
   useEffect(() => {
     if (load) {
 
-      setCount(30)
+      setCount(60)
 
       let timer = setInterval(() => {
 
         if (load) {
           setCount(prev => {
             if (prev < 1) {
-               clearInterval(timer)
+              clearInterval(timer)
               return 0;
-             
+
             }
 
             return prev - 1;
           })
 
-         
+
         }
 
       }, 1000)
 
-       return ()=> clearInterval(timer)
+      return () => clearInterval(timer)
 
 
 
@@ -64,9 +64,9 @@ const TripResult = ({ plan, load }) => {
         <p>Creating your perfect itinerary, finding hotels, and gathering local tips. Please wait!</p>
 
 
- <div className='countdown-timer'>
-            ⏱️ Ready in approximately <strong>{count}s</strong>
-          </div>
+        <div className='countdown-timer'>
+          ⏱️ Ready in approximately <strong>{count}s</strong>
+        </div>
 
       </div>
     );
@@ -79,7 +79,7 @@ const TripResult = ({ plan, load }) => {
         <h2>Ready for an adventure?</h2>
         <p>Fill out your destination, dates, and budget on the left to generate a complete AI-powered trip plan in seconds!</p>
         <div>
-         
+
         </div>
       </div>
     );
@@ -145,8 +145,15 @@ const TripResult = ({ plan, load }) => {
 
 
       <div className='bottom-grid'>
-        <SuggetionList item={plan.foodSuggestions} title="Food Sugetions" showImage={true} category="food"  />
-        <SuggetionList item={plan.transportSuggestions} title="Transport Suggetions" showImage={true} category="transport" />
+        <SuggetionList item={plan.foodSuggestions} title="Food Sugetions" showImage={true} category="food" 
+        defaultImage="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400" />
+
+        <SuggetionList item={plan.transportSuggestions} title="Transport Suggetions" showImage={true} category="transport"
+        defaultImage = 
+        "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400"
+        />
+
+
         <SuggetionList item={plan.travelTips} title="Travel Tips" /></div>
     </div>
   )
