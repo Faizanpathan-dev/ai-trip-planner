@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ai_trip_planner.Dto.RequestPlan;
 import edu.ai_trip_planner.Dto.TripPlanResponse;
+import edu.ai_trip_planner.Entity.TripEntity;
+import edu.ai_trip_planner.repository.aiRepository;
+
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +18,16 @@ public class Aiservice {
 
 private final ChatClient chatClient;
 private final ObjectMapper objectMapper;
-public Aiservice(ChatClient.Builder builder , ObjectMapper objectMapper){  //It’s a nested class inside ChatClient andar hai
+private final aiRepository tripRepository;
+
+public Aiservice(ChatClient.Builder builder , ObjectMapper objectMapper,aiRepository tripRepository){  //It’s a nested class inside ChatClient andar hai
      this.chatClient = builder.build();
      this.objectMapper = objectMapper;
+    this.tripRepository=tripRepository;
 }
 
     public TripPlanResponse getPlan(RequestPlan p){
+
 
 if(p.getStartDate().isAfter(p.getEndDate())){
     throw  new RuntimeException("start date cannot be after end date ");
@@ -92,8 +99,11 @@ if(p.getStartDate().isAfter(p.getEndDate())){
                 Make budgetBreakdown.total equal to the user's total budget.
                 Make bookingUrl a plain Google search URL for booking that hotel
                 
-                 For foodSuggestions imageKeyword: use the dish name only, example: "Misal Pav food", "Shrewsbury biscuits".
-                        For transportSuggestions imageKeyword: use vehicle type only, example: "auto rickshaw", "city bus", "taxi cab"
+                For foodSuggestions imageKeyword: use ONLY the dish name + word "food". NO city names, NO location words.
+                 Example: "Vada Pav food", "Biryani dish", "Brunch food"
+
+                For transportSuggestions imageKeyword: use ONLY vehicle type + word "vehicle". NO city names.
+                 Example: "metro train vehicle", "taxi cab vehicle", "bus vehicle"
                 .
                 """.formatted(
                 p.getDestination(),
@@ -115,7 +125,19 @@ if(p.getStartDate().isAfter(p.getEndDate())){
 
 
               try{
-                  return objectMapper.readValue(aiJson,TripPlanResponse.class);
+               TripPlanResponse respons = objectMapper.readValue(aiJson,TripPlanResponse.class);
+                
+               TripEntity entity = new TripEntity();
+
+               entity.setDestination(respons.getDestination());
+               entity.setStarDate(respons.getStartDate());
+               entity.setBudget(respons.getBudget());
+               entity.setEndDate(respons.getEndDate());
+               entity.setPlanJson(aiJson);
+
+           tripRepository.save(entity);
+
+               return respons ;
               }
               catch (JsonProcessingException e){
                   throw new RuntimeException("Ai return invalid json" + aiJson,e);
