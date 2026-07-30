@@ -9,7 +9,6 @@ const HotelCard = ({ hotel, destination }) => {
 
 
 
-
   const [hotelImage, setHotelImage] = useState("")
   useEffect(() => {
 
