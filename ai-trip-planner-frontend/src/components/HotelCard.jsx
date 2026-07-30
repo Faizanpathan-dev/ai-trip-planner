@@ -15,7 +15,7 @@ const HotelCard = ({ hotel, destination }) => {
 
     const fetchImage = async () => {
       const hotelFallback = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&auto=format&fit=crop" // hotel image fallback
-      const url = await getGenerateImages(`${hotel.name} ${destination} hotel luxury`)
+      const url = await getGenerateImages(`${hotel.name} ${destination}  hotel `)
       setHotelImage(url || hotelFallback)
     }
     fetchImage();
