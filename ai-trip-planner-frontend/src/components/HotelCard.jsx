@@ -4,7 +4,7 @@ import { getGenerateImages } from '../UnsplashServises'
 const HotelCard = ({ hotel, destination }) => {
 
   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${hotel.name} ${hotel.area} ${destination}`
+    `${hotel.name} ${hotel.area}${destination}`
   )}`
 
 
